@@ -1,0 +1,122 @@
+﻿@using EduHome.Core.DTOS;
+@model TeacherGetDto
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+              
+                    <form enctype="multipart/form-data" method="post" class="forms-sample">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group m-5">
+                            <input accept="image/*" type="file" name="ImageFile" class="form-control" placeholder="Image">
+                            <br>
+                            <img style="width:150px;height:150px;" src="~/img/teacher/@Model.Image" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FullName"></label>
+                            <input asp-for="FullName" class="form-control" placeholder="FullName">
+                            <span class="text text-danger" asp-validation-for="FullName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="About"></label>
+                            <input asp-for="About" class="form-control" placeholder="About">
+                            <span class="text text-danger" asp-validation-for="About"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Profession"></label>
+                            <input asp-for="Profession" class="form-control" placeholder="Profession">
+                            <span class="text text-danger" asp-validation-for="Profession"></span>
+                        </div>
+                        <div class="form-group">
+                            <select name="FacultyId" class="form-select" aria-label="Default select example">
+                                <option selected>Faculty</option>
+                                @foreach (var item in ViewBag.Faculty)
+                                {
+                              
+                                   @foreach (var item2 in Model.TeacherFaculties)
+                                    {
+                                        @if (item2.FacultyId == item.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option  value="@item.Id">@item.Name</option>
+                                        }
+                                    } 
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="HobbyId" class="form-select" aria-label="Default select example">
+                                <option selected>Brand</option>
+                                @foreach (var item in ViewBag.Hobby)
+                                {
+
+                                    @foreach (var item2 in Model.TeacherHobbies)
+                                    {
+                                        @if (item2.HobbyId == item.Id)
+                                        {
+                                            <option selected value="@item.Id">@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-row col-12" id="social">
+                            @for (int i = 0; i < Model.Icons.Count(); i++)
+                            {
+                                <div class="form-group col-md-6" data-index="0">
+                                    <label>Social Icon</label>
+                                    <input class="form-control" asp-for="Icons" value="@Model.Icons[i]">
+                                    <span asp-validation-for="Icons"></span>
+                                    <label> Social Url</label>
+                                    <input class="form-control" asp-for="Urls" value="@Model.Urls[i]">
+                                    <span asp-validation-for="Urls"></span>
+                                    @if (i != 0)
+                                    {
+                                        <span><i style="cursor:pointer" class="fas fa-minus delete-feature"> </i></span>
+                                    }
+                                </div>
+                            }
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script>
+    const otherimages = document.querySelectorAll(".otherimages");
+
+    otherimages.forEach(image => {
+        image.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = image.getAttribute("data-id")
+            fetch(`/Admin/Product/removeimage/${id}`)
+                .then(x => x.json())
+                .then(x => {
+                    if (x.status== 200) {
+                        image.remove();
+                    } else {
+                        alert("xetabasverdi")
+                    }
+                }
+                )
+
+        })
+    })
+</script>

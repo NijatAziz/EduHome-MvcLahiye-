@@ -1,0 +1,78 @@
+﻿@using EduHome.Core.DTOS;
+@model TeacherPostDto
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <p class="card-description">
+                        Basic form Teacher
+                    </p>
+                    <form enctype="multipart/form-data" method="post" class="forms-sample">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group m-5">
+                            <input accept="image/*" asp-for="ImageFile" class="form-control" placeholder="Info">
+                            <span class="text text-danger" asp-validation-for="ImageFile"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FullName"></label>
+                            <input asp-for="FullName" class="form-control" placeholder="FullName">
+                            <span class="text text-danger" asp-validation-for="FullName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="About"></label>
+                            <input asp-for="About" class="form-control" placeholder="About">
+                            <span class="text text-danger" asp-validation-for="About"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Profession"></label>
+                            <input asp-for="Profession" class="form-control" placeholder="Profession">
+                            <span class="text text-danger" asp-validation-for="Profession"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="FacultyId" class="form-select" aria-label="Default select example">
+                                <option selected>Faculty</option>
+                                @foreach (var item in ViewBag.Faculty)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span class="text text-danger" asp-validation-for="FacultyId"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="HobbyId" class="form-select" aria-label="Default select example">
+                                <option selected>Brand</option>
+                                @foreach (var item in ViewBag.Hobby)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span class="text text-danger" asp-validation-for="HobbyId"></span>
+                        </div>
+
+                        <div class="form-row col-12" id="social">
+                            <div class="form-group col-md-6" data-index="0">
+                                <label>Social Icon</label>
+                                <input class="form-control" asp-for="Icons">
+                                <span asp-validation-for="Icons"></span>
+                                <label> Social Url</label>
+                                <input class="form-control" asp-for="Urls">
+                                <span asp-validation-for="Urls"></span>
+                            </div>
+
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

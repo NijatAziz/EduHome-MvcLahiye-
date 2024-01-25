@@ -1,0 +1,75 @@
+﻿@using EduHome.Core.DTOS.Course;
+@using EduHome.Core.DTOS.Feature;
+@model CoursePostDto
+@{
+    List<CategoryGetDto> category = ViewBag.Category;
+    List<FeatureGetDto> feature = ViewBag.Feature;
+}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <form enctype="multipart/form-data" method="post" class="forms-sample">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group m-5">
+                            <input accept="image/*" asp-for="ImageFile" class="form-control" placeholder="Info">
+                            <span class="text text-danger" asp-validation-for="ImageFile"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" placeholder="Title">
+                            <span class="text text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Desc"></label>
+                            <input asp-for="Desc" class="form-control" placeholder="Desc">
+                            <span class="text text-danger" asp-validation-for="Desc"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="About"></label>
+                            <input asp-for="About" class="form-control" placeholder="About">
+                            <span class="text text-danger" asp-validation-for="About"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HowToApply"></label>
+                            <input asp-for="HowToApply" class="form-control" placeholder="HowToApply">
+                            <span class="text text-danger" asp-validation-for="HowToApply"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Certification"></label>
+                            <input asp-for="Certification" class="form-control" placeholder="Certification">
+                            <span class="text text-danger" asp-validation-for="Certification"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="CategoryId" class="form-select" aria-label="Default select example">
+                                <option selected>Category</option>
+                                @foreach (CategoryGetDto item in category)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span class="text text-danger" asp-validation-for="CategoryId"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="FeatureId" class="form-select" aria-label="Default select example">
+                                <option selected>Feature</option>
+                                @foreach (var item in feature)
+                                {
+                                    <option value="@item.Id">@item.Starts - @item.CourseFee</option>
+                                }
+                            </select>
+                            <span class="text text-danger" asp-validation-for="FeatureId"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

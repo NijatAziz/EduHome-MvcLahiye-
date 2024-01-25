@@ -1,0 +1,142 @@
+﻿@using EduHome.Core.DTOS.Blog
+@using EduHome.Core.DTOS.Category
+@using EduHome.Core.DTOS.Comment;
+@model BlogGetDto
+@{
+    var categories = ViewBag.Categories as IEnumerable<CategoryGetDto>;
+    var blogs = ViewBag.Blogs as IEnumerable<BlogGetDto>;
+    ViewData["Title"] = "Blog Detail";
+}
+
+
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+    <div class="banner-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="banner-content-wrapper">
+                        <div class="banner-content">
+                            <h2>blog details</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Area End -->
+<!-- Blog Start -->
+<div class="blog-details-area pt-150 pb-140">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-details">
+                    <div class="blog-details-img">
+                        <img src="~/img/blog/@Model.Image" alt="blog-details">
+                    </div>
+                    <div class="blog-details-content">
+                        <h2></h2>
+                        <h6>@Model.TeacherGetDto.FullName /  @Model.Date.ToString("MM/dd/yyyy")  /  <i class="fa fa-comments-o"></i>@Model.CommentCount</h6>
+                        <p>@Model.Desc</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+                    </div>
+                    <div class="reply-area">
+                        <form asp-controller="BlogComment" asp-action="AddComment" method="post">
+                            <input type="hidden" name="BlogId" value="@Model.Id" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Subject</p>
+                                    <input type="text" name="Subject" id="Subject" required />
+                                </div>
+                                <div class="col-md-12">
+                                    <p>Message</p>
+                                    <textarea name="Message" id="Message" cols="15" rows="10" required></textarea>
+                                </div>
+                            </div>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="reply-area">
+                        <h3>All Comments</h3>
+                        @foreach (var item in (List<CommentWithUserNameDto>)ViewBag.Comments)
+                        {
+                            <div>
+                                <P style="font-size: 19px; color: red">@item.UserName</P>
+                                <div style="border:1px solid gray;">
+                                    <p style="padding: 6px">Subject- @item.Subject</p>
+                                    <p style="padding: 6px">Message- @item.Message</p>
+
+                          @*          <form method="post" asp-action="UpdateComment" asp-controller="BlogComment">
+                                        <input type="hidden" name="commentId" value="@item.Id" />
+                                        <button type="submit">Update Comment</button>
+                                    </form>
+
+                                    <form method="post" asp-action="RemoveComment" asp-controller="BlogComment" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                        <input type="hidden" name="commentId" value="@item.Id" />
+                                        <button type="submit">Remove Comment</button>
+                                    </form>*@
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="blog-sidebar right">
+                    <div class="single-blog-widget mb-47">
+                        <h3>search</h3>
+                        <div class="blog-search">
+                            <form id="search" action="#">
+                                <input type="search" placeholder="Search..." name="search" />
+                                <button type="submit">
+                                    <span><i class="fa fa-search"></i></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="single-blog-widget mb-47">
+                        <h3>categories</h3>
+                        <ul>
+                            @foreach (var item in categories)
+                            {
+                                <li><a href="#">@item.Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="single-blog-widget mb-47">
+                        <div class="single-blog-banner">
+                            <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
+                            <h2>best<br> eductaion<br> theme</h2>
+                        </div>
+                    </div>
+                    <div class="single-blog-widget mb-47">
+                        <h3>latest post</h3>
+                        @foreach (var item in blogs.Take(3))
+                        {
+
+                            <div class="single-post mb-30">
+                                <div class="single-post-img">
+                                    <a href="blog-details.html">
+                                        <img style="width:100px" src="~/img/blog/@item.Image" alt="post">
+                                        <div class="blog-hover">
+                                            <i class="fa fa-link"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="single-post-content">
+                                    <h4><a href="blog-details.html">@item.Title</a></h4>
+                                    <p>@item.TeacherGetDto.FullName / @item.Date.ToString("MM/dd/yyyy") </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

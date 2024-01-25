@@ -1,0 +1,46 @@
+﻿@using EduHome.Core.DTOS.Blog;
+@model BlogPostDto
+@{
+    var teachers = ViewBag.Teacher.Items;
+}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <form enctype="multipart/form-data" method="post" class="forms-sample">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" placeholder="Name">
+                            <span class="text text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Desc"></label>
+                            <input asp-for="Desc" class="form-control" placeholder="Info">
+                            <span class="text text-danger" asp-validation-for="Desc"></span>
+                        </div>
+                        <div class="form-group">
+                            <select asp-for="TeacherId" class="form-select" aria-label="Default select example">
+                                <option selected>Author</option>
+                                @foreach (var item in teachers)
+                                {
+                                    <option value="@item.Id">@item.FullName</option>
+                                }
+                            </select>
+                            <span class="text text-danger" asp-validation-for="TeacherId"></span>
+                        </div>
+                        <div class="form-group m-5">
+                            <input accept="image/*" asp-for="ImageFile" class="form-control" placeholder="Info">
+                            <span class="text text-danger" asp-validation-for="ImageFile"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

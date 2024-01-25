@@ -1,0 +1,59 @@
+﻿@using EduHome.Core.DTOS.Blog;
+@model BlogGetDto
+
+
+@{
+    var teachers = ViewBag.Teacher.Items;
+}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <p class="card-description">
+                        Basic form layout
+                    </p>
+                    <form enctype="multipart/form-data" method="post" class="forms-sample">
+                        <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" placeholder="Name">
+                            <span class="text text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Desc"></label>
+                            <input asp-for="Desc" class="form-control" placeholder="Info">
+                            <span class="text text-danger" asp-validation-for="Desc"></span>
+                        </div>
+                                <div class="form-group">
+                            <select name="TeacherId" class="form-select" aria-label="Default select example">
+                                <option selected>Authors</option>
+                             @foreach (var item in teachers)
+                                {
+                                    @if (Model.TeacherGetDto.Id == item.Id)
+                                    {
+                                        <option selected value="@item.Id">@item.FullName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.FullName</option>
+                                   }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group m-5">
+                            <input type="file" accept="image/*" name="ImageFile" class="form-control">
+                            <br />
+                            <img style="width:150px;height:150px;" src="~/img/blog/@Model.Image" />
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

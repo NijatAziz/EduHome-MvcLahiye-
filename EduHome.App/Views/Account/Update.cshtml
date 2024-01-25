@@ -1,0 +1,60 @@
+﻿@model UpdateDto
+@{
+    ViewData["Title"] = "Update Page";
+}
+
+<!-- Banner Area Start -->
+<div class="banner-area-wrapper">
+    <div class="banner-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="banner-content-wrapper">
+                        <div class="banner-content">
+                            <h2>Update</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Area End -->
+<!-- Register start -->
+<div class="register-area pt-150 pb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="login">
+                    <div class="login-form-container">
+                        <div class="login-text">
+                            <h2>Update</h2>
+                            <span>Update your account.</span>
+                        </div>
+                        <div class="login-form">
+                            <form action="#" method="post">
+                                <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+
+                                <input type="text" asp-for="FullName" placeholder="Fullname">
+                                <input type="text" asp-for="UserName" placeholder="Username">
+                                <input type="text" asp-for="OldPassword" placeholder="OldPassword">
+                                <input type="text" asp-for="NewPassword" placeholder="NewPassword">
+                                <div class="button-box">
+                                    <button style="width:100%;" type="submit" class="default-btn w-100">Submit</button>
+                                </div>
+                            </form>
+                            <div class="w-100 mt-4">
+                                <a class="default-btn d-block w-100" asp-controller="account" asp-action="Logout" style="
+    width: 100%;
+    text-align: center;
+    margin-top: 17px;
+">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register end -->
